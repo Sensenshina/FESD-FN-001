@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-list',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './user-list.html',
   styleUrls: ['./user-list.css']
 })

@@ -1,6 +1,7 @@
 export class User {
   userEmail: string = ''; // String(85) - Email format required
   userPassword: string = ''; // String(15) - 8-15 characters
+  userId?: string;
   userFirstName: string = ''; // String(50) - First name
   userLastName: string = ''; // String(50) - Last name
   userTel: string = ''; // String(50) - Phone number (digits only)
@@ -9,6 +10,7 @@ export class User {
   constructor(
     userEmail: string = '',
     userPassword: string = '',
+    userId?: string,
     userFirstName: string = '',
     userLastName: string = '',
     userTel: string = '',
@@ -16,6 +18,7 @@ export class User {
   ) {
     this.userEmail = userEmail;
     this.userPassword = userPassword;
+    this.userId = userId;
     this.userFirstName = userFirstName;
     this.userLastName = userLastName;
     this.userTel = userTel;
