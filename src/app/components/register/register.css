@@ -1,0 +1,33 @@
+.container {
+  max-width: 600px;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.invalid-feedback {
+  display: block;
+  color: #dc3545;
+  font-size: 0.875rem;
+}
+
+.alert {
+  border-radius: 0.25rem;
+}
+
+.btn {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}

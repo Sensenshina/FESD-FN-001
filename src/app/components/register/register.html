@@ -1,0 +1,135 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">User Registration</h2>
+
+      <div *ngIf="alertMessage" [ngClass]="'alert alert-' + alertType" role="alert">
+        {{ alertMessage }}
+      </div>
+
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="userFirstName" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['userFirstName'].errors }"
+            id="userFirstName"
+            formControlName="userFirstName"
+            placeholder="Enter first name"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="submitted && f['userFirstName'].errors">
+            First Name is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="userLastName" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['userLastName'].errors }"
+            id="userLastName"
+            formControlName="userLastName"
+            placeholder="Enter last name"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="submitted && f['userLastName'].errors">
+            Last Name is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="userEmail" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['userEmail'].errors }"
+            id="userEmail"
+            formControlName="userEmail"
+            placeholder="Enter email"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="submitted && f['userEmail'].errors">
+            <span *ngIf="f['userEmail'].errors['required']">Email is required</span>
+            <span *ngIf="f['userEmail'].errors['email']">Email must be in valid format</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="userPassword" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['userPassword'].errors }"
+            id="userPassword"
+            formControlName="userPassword"
+            placeholder="Enter password (8-15 characters)"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="submitted && f['userPassword'].errors">
+            <span *ngIf="f['userPassword'].errors['required']">Password is required</span>
+            <span *ngIf="f['userPassword'].errors['minlength']">Password must be at least 8 characters</span>
+            <span *ngIf="f['userPassword'].errors['maxlength']">Password must not exceed 15 characters</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="userTel" class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['userTel'].errors }"
+            id="userTel"
+            formControlName="userTel"
+            placeholder="Enter phone number (digits only)"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="submitted && f['userTel'].errors">
+            <span *ngIf="f['userTel'].errors['required']">Phone number is required</span>
+            <span *ngIf="f['userTel'].errors['pattern']">Phone number must contain only digits</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="dateOfBirth" class="form-label">Date of Birth (YYYY-mm-dd)</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['dateOfBirth'].errors }"
+            id="dateOfBirth"
+            formControlName="dateOfBirth"
+            placeholder="YYYY-mm-dd"
+            required
+          />
+          <div class="invalid-feedback" *ngIf="submitted && f['dateOfBirth'].errors">
+            <span *ngIf="f['dateOfBirth'].errors['required']">Date of Birth is required</span>
+            <span *ngIf="f['dateOfBirth'].errors['invalidDateFormat']">Date must be in YYYY-mm-dd format</span>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="resetForm()"
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="isLoading"
+          >
+            <span *ngIf="!isLoading">Register</span>
+            <span *ngIf="isLoading">
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Loading...
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

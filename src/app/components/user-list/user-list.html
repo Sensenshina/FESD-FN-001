@@ -1,0 +1,115 @@
+<div class="container-fluid mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>User List</h2>
+    
+    <div class="btn-group" role="group">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        [ngClass]="{ active: viewMode === 'table' }"
+        (click)="toggleViewMode('table')"
+      >
+        Table View
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        [ngClass]="{ active: viewMode === 'card' }"
+        (click)="toggleViewMode('card')"
+      >
+        Card View
+      </button>
+    </div>
+
+    <button class="btn btn-info" (click)="loadUsers()" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Refresh</span>
+      <span *ngIf="isLoading">
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Loading...
+      </span>
+    </button>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && viewMode === 'table'" class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.getFullName() }}</td>
+          <td>{{ user.userEmail }}</td>
+          <td>{{ user.userTel }}</td>
+          <td>
+            <span class="badge bg-info">{{ getUserAge(user) }} years</span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-warning me-1" title="Edit">
+              Edit
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteUser(user.userId)" title="Delete">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="users.length === 0" class="alert alert-info">
+      No users found.
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && viewMode === 'card'" class="row">
+    <div *ngFor="let user of users; let i = index" class="col-lg-4 col-md-6 col-sm-12 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="card-title mb-0">{{ user.getFullName() }}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <strong>Email:</strong> {{ user.userEmail }}
+          </p>
+          <p class="card-text">
+            <strong>Phone:</strong> {{ user.userTel }}
+          </p>
+          <p class="card-text">
+            <strong>Date of Birth:</strong> {{ user.dateOfBirth }}
+          </p>
+          <p class="card-text">
+            <strong>Age:</strong>
+            <span class="badge bg-info">{{ getUserAge(user) }} years</span>
+          </p>
+        </div>
+        <div class="card-footer bg-light">
+          <button class="btn btn-sm btn-warning me-1" title="Edit">
+            Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteUser(user.userId)" title="Delete">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="users.length === 0" class="alert alert-info w-100">
+      No users found.
+    </div>
+  </div>
+</div>
